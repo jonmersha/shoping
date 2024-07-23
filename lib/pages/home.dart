@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shop/RemoteService/controller/user_controller.dart';
-import 'package:shop/components/UserCard.dart';
-import 'package:shop/pages/forms/ProductForms.dart';
-import 'package:shop/pages/forms/product_create.dart';
+import 'package:shop/RemoteService/controller/category_controller.dart';
+import 'package:shop/pages/components/cards/category_card.dart';
+import 'package:shop/pages/forms/category_form.dart';
 import 'package:shop/utils/app_constants.dart';
 
 class Shop extends StatelessWidget {
@@ -18,16 +17,14 @@ class Shop extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white70),
          useMaterial3: true,
       ),
-      home: const Home(title: 'Personal Objectives '),
+      home: const Home(title: 'Product Category'),
     );
   }
 }
 
 class Home extends StatefulWidget {
   const Home({super.key, required this.title});
-
   final String title;
-
   @override
   State<Home> createState() => _MyHomePageState();
 }
@@ -42,15 +39,15 @@ class _MyHomePageState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    Get.find<UserController>().getList('$STOCKS/get');
+    Get.find<CategoryController>().getList('$CATEGORY/get');
     return Scaffold(
-      body: GetBuilder<UserController>(
+      body: GetBuilder<CategoryController>(
         builder: (controller) {
           return controller.isLoaded
               ? ListView.builder(
                   itemCount: controller.list.length,
                   itemBuilder: (context, index) {
-                    return  UserView(user: controller.list[index],);
+                    return  CategoryCard(category: controller.list[index],);
                   })
               : const Center(
                   child: CircularProgressIndicator(
@@ -63,7 +60,7 @@ class _MyHomePageState extends State<Home> {
         onPressed: (){
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => const CreateProduct(),
+              builder: (context) => const CreateCategory(),
             ),
           );
         },

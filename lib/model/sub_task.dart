@@ -7,7 +7,7 @@ class SubTask {
     if (json['Data'] != null) {
       data = <Data>[];
       json['Data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(Data.fromJson(v));
       });
     }
   }

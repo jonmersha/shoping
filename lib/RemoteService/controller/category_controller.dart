@@ -1,11 +1,12 @@
 import 'package:get/get.dart';
 import 'package:shop/RemoteService/repository/repo_service.dart';
 import 'package:shop/model/UserAcc.dart';
+import 'package:shop/model/category.dart';
 
 
-class ProductController extends GetxController {
+class CategoryController extends GetxController {
   final Services serviceRepo;
-  ProductController({required this.serviceRepo});
+  CategoryController({required this.serviceRepo});
   List<dynamic> _list = [];
   List<dynamic> get list => _list;
 
@@ -18,13 +19,12 @@ class ProductController extends GetxController {
   bool _isPostedError=false;
   bool get isPostedError => _isPostedError;
 
-
   Future<void> getList(String path) async {
     Response response = await serviceRepo.getAll(path);
-    print(response.body);
+    //print(response.body);
     if (response.statusCode == 200) {
       _list = [];
-      _list.addAll(User.fromJson(response.body).data!);
+      _list.addAll(Category.fromJson(response.body).data!);
       _isLoaded = true;
       update();
       _isLoaded = true;

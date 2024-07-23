@@ -5,6 +5,6 @@ class ProductForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  SafeArea(child: Scaffold(body: Container(child: Text("this is the text we need"),),));
+    return  SafeArea(child: Scaffold(body: Container(child: const Text("this is the text we need"),),));
   }
 }

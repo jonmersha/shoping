@@ -69,7 +69,7 @@ class _CreateProductState extends State<CreateProduct> {
               buildTextFormField(_objStartDateController, 'Object Start Date', 'Enter Object Start Date (YYYY-MM-DD)'),
               buildTextFormField(_objEndDateController, 'Object End Date', 'Enter Object End Date (YYYY-MM-DD)'),
               CheckboxListTile(
-                title: Text('Has Sub Task'),
+                title: const Text('Has Sub Task'),
                 value: _hasSubTask,
                 onChanged: (bool? value) {
                   setState(() {
@@ -78,7 +78,7 @@ class _CreateProductState extends State<CreateProduct> {
                 },
               ),
               CheckboxListTile(
-                title: Text('Is Progressive'),
+                title: const Text('Is Progressive'),
                 value: _isProgressive,
                 onChanged: (bool? value) {
                   setState(() {
@@ -86,14 +86,14 @@ class _CreateProductState extends State<CreateProduct> {
                   });
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _sendData();
                   }
                 },
-                child: Text('Submit'),
+                child: const Text('Submit'),
               ),
             ],
           ),

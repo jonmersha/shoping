@@ -8,6 +8,6 @@ class TitleText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(this.text,style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.w600),);
+    return Text(text,style: const TextStyle(fontSize: 25.0,fontWeight: FontWeight.w600),);
   }
 }

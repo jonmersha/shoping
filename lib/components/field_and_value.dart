@@ -13,20 +13,20 @@ class FieldAndValue extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            padding: EdgeInsets.only(left: 5,bottom: 20),
+            padding: const EdgeInsets.only(left: 5,bottom: 20),
+            width: 150,
             child: Text(
-              this.title,
-              style: TextStyle(
+              title,
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w600
               ),
             ),
-            width: 150,
           ),
           Expanded(
             child: Container(
-              padding: EdgeInsets.only( left: 20,bottom: 20,right: 10),
-              child: Text(this.value,style: TextStyle(fontSize: 20),),
+              padding: const EdgeInsets.only( left: 20,bottom: 20,right: 10),
+              child: Text(value,style: const TextStyle(fontSize: 20),),
             ),
           )
         ],

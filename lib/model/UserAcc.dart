@@ -7,13 +7,13 @@ class User {
     if (json['Data'] != null) {
       data = <Data>[];
       json['Data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(Data.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (this.data != null) {
       data['Data'] = this.data!.map((v) => v.toJson()).toList();
     }
@@ -44,12 +44,12 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['user_id'] = this.userId;
-    data['login_token'] = this.loginToken;
-    data['user_email'] = this.userEmail;
-    data['full_name'] = this.fullName;
-    data['user_type'] = this.userType;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['user_id'] = userId;
+    data['login_token'] = loginToken;
+    data['user_email'] = userEmail;
+    data['full_name'] = fullName;
+    data['user_type'] = userType;
     return data;
   }
 }
