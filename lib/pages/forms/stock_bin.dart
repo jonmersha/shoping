@@ -2,52 +2,50 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop/RemoteService/controller/product_controller.dart';
 import 'package:shop/components/title_text_widget.dart';
-import 'package:shop/pages/product_registrations.dart';
-import 'package:shop/pages/registrations/product.dart';
 import 'package:shop/utils/app_constants.dart';
 
 
-class CreateProduct extends StatefulWidget {
-  final category;
-  const CreateProduct({super.key, required this.category});
+class CreateStockBIN extends StatefulWidget {
+  final product;
+  const CreateStockBIN({super.key, required this.product});
   @override
-  _CreateProductState createState() => _CreateProductState();
+  _CreateStockBINState createState() => _CreateStockBINState();
 }
 
-class _CreateProductState extends State<CreateProduct> {
+class _CreateStockBINState extends State<CreateStockBIN> {
   final _formKey = GlobalKey<FormState>();
 
   // Form fields controllers
-  final TextEditingController _productNameController = TextEditingController();
-  final TextEditingController _descriptionsController = TextEditingController();
-  final TextEditingController _quantityController = TextEditingController();
-  final TextEditingController _unitsOfMeasureController = TextEditingController();
-  final TextEditingController _unitPriceController = TextEditingController();
-  final TextEditingController _minThresholdController = TextEditingController();
-  final TextEditingController _profitMarginController = TextEditingController();
+  //final
+  final TextEditingController _currentQuantityController = TextEditingController();
+
+  final TextEditingController _storeIdController = TextEditingController();
+  //final TextEditingController _previousPriceController = TextEditingController();
+  final TextEditingController _currentPriceController = TextEditingController();
+  final TextEditingController _regDateController = TextEditingController();
+ // final TextEditingController _registeredByController = TextEditingController();
 
   @override
   void dispose() {
-    _productNameController.dispose();
-    _descriptionsController.dispose();
-    _quantityController.dispose();
-    _unitsOfMeasureController.dispose();
-    _unitPriceController.dispose();
-    _minThresholdController.dispose();
-    _profitMarginController.dispose();
+    _currentQuantityController.dispose();
+    _storeIdController.dispose();
+    _currentPriceController.dispose();
+    _regDateController.dispose();
+    super.dispose();
     super.dispose();
   }
   Future<void> _sendData() async {
     final Map<String, dynamic> data = {
-      "category": widget.category.id,
+      "product_id": 2,
+      "previous_quantity": 123,
+      "current_quantity": _currentQuantityController.text,
+      "stock_balance": 200,
       "merchant_id": 1,
-      "product_name":_productNameController.text,
-      "descriptions": _descriptionsController.text,
-      "quantity":double.parse(_quantityController.text),
-      "units_of_measure": _unitsOfMeasureController.text,
-      "unit_price":double.parse(_unitPriceController.text),
-      "profit_margin":_profitMarginController.text,
-      "min_threshold":int.parse(_minThresholdController.text),
+      "store_id": _storeIdController.text,
+      "previous_price": 100,
+      "current_price": _currentPriceController.text,
+      "reg_date": "2024-07-10T12:32:01.000Z",
+      "registered_by": 1
     };
     Get.find<ProductController>().addData('$PRODUCT/add',data);
     navigateTo();
@@ -56,22 +54,19 @@ class _CreateProductState extends State<CreateProduct> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(8.0),
         child: Form(
           key: _formKey,
           child: ListView(
             children: <Widget>[
               const TitleText(text:'Create new product'),
-              Text('Product Category:${widget.category.name.toString()}'),
-
-              buildTextFormField(_productNameController, 'Product Name', 'Enter Name'),
-              buildTextFormField(_descriptionsController, 'Product Description', 'Enter Descriptions', maxLines: 3),
-              buildTextFormField(_unitsOfMeasureController, 'Units Of Measure', 'Pcs'),
-              buildTextFormField(_quantityController, 'Quantity', 'inter product quantity(1,2,3)'),
-              buildTextFormField(_unitPriceController, 'Unit Price', 'Enter Unit price'),
-              buildTextFormField(_profitMarginController, 'Profit Margin', 'inter profit margin %'),
-              buildTextFormField(_minThresholdController, 'Threshold', 'inter min threshold'),
-
+              Text('Product Category:${widget.product.name.toString()}'),
+              Text('Exsting Ammout:'),
+              buildTextFormField(_currentQuantityController, 'current Quantity ', 'Enter quantity of the Products'),
+              Text('Stock Balance:'),
+              buildTextFormField(_storeIdController, 'Product Description', 'Enter Descriptions', maxLines: 3),
+              Text('Previuse:'),
+              buildTextFormField(_currentPriceController, 'Units Of Measure', 'Pcs'),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {

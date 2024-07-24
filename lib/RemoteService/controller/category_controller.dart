@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:shop/RemoteService/repository/repo_service.dart';
-import 'package:shop/model/UserAcc.dart';
 import 'package:shop/model/category.dart';
 
 

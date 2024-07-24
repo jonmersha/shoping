@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop/pages/forms/category_form.dart';
+import 'package:shop/pages/forms/product_create.dart';
+import 'package:shop/pages/products/product_list.dart';
 
 class CategoryCard extends StatefulWidget {
   final category;
@@ -17,7 +19,7 @@ class _CategoryCardState extends State<CategoryCard> {
         onTap: (){
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => const CreateCategory(),
+              builder: (context) =>  ProductList(),//CreateProduct(category: widget.category),
             ),
           );
         },

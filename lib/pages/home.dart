@@ -64,7 +64,7 @@ class _MyHomePageState extends State<Home> {
             ),
           );
         },
-        tooltip: 'Increment',
+        tooltip: 'Add New Category',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );

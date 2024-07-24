@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:shop/RemoteService/repository/repo_service.dart';
 import 'package:shop/model/UserAcc.dart';
+import 'package:shop/model/product.dart';
 
 
 class ProductController extends GetxController {
@@ -24,18 +25,18 @@ class ProductController extends GetxController {
     print(response.body);
     if (response.statusCode == 200) {
       _list = [];
-      _list.addAll(User.fromJson(response.body).data!);
+      _list.addAll(Product.fromJson(response.body).data!);
       _isLoaded = true;
       update();
       _isLoaded = true;
     } else {
-      print(response.statusText);
+     // print(response.statusText);
     }
   }
   Future<void> addData(String path,dynamic data) async {
     //print('Post Sent');
     Response response = await serviceRepo.addData(path,data);
-    print(response.statusText);
+    //print(response.statusText);
     if (response.statusCode == 200) {
       _isPosted=true;
       update();

@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop/RemoteService/controller/product_controller.dart';
-class ProductRegistration extends StatefulWidget {
+class Registration extends StatefulWidget {
   final data;
   final path;
-  const ProductRegistration({super.key, this.data, this.path});
+
+  const Registration({super.key, this.data, this.path});
   @override
-  State<ProductRegistration> createState() =>
-      _ProductRegistrationState();
+  State<Registration> createState() =>
+      _RegistrationState();
 }
 
-class _ProductRegistrationState extends State<ProductRegistration> {
+class _RegistrationState extends State<Registration> {
   @override
   Widget build(BuildContext context) {
-    // Get.find<ProductController>().addData(widget.path, widget.data);
+    Get.find<ProductController>().addData(widget.path, widget.data);
     return Scaffold(
       body: GetBuilder<ProductController>(
         builder: (controller) {

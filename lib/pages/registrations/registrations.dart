@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop/RemoteService/controller/category_controller.dart';
-import 'package:shop/RemoteService/controller/product_controller.dart';
 class RegistrationPage extends StatefulWidget {
   final data;
   final path;

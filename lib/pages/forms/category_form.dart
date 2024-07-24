@@ -23,8 +23,8 @@ class _CreateCategoryState extends State<CreateCategory> {
   final TextEditingController _imageNameController = TextEditingController();
 
   // Checkboxes state
-  bool _hasSubTask = false;
-  bool _isProgressive = false;
+  final bool _hasSubTask = false;
+  final bool _isProgressive = false;
 
   @override
   void dispose() {
