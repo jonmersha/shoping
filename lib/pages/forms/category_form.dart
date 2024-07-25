@@ -44,7 +44,7 @@ class _CreateCategoryState extends State<CreateCategory> {
       "merchant_id": 1,//_merchantController.text,
       "description": _descriptionController.text,
       "status":1,// _statusController.text,
-      "imagename":'placeholder.jpg'// _imageNameController.text,
+      "image_name":'placeholder.jpg'// _imageNameController.text,
 
     };
     Navigator.of(context).push(

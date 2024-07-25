@@ -7,13 +7,13 @@ class Category {
     if (json['Data'] != null) {
       data = <Data>[];
       json['Data'].forEach((v) {
-        data!.add(Data.fromJson(v));
+        data!.add(new Data.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+    final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.data != null) {
       data['Data'] = this.data!.map((v) => v.toJson()).toList();
     }
@@ -24,36 +24,36 @@ class Category {
 class Data {
   int? id;
   String? name;
-  int? merchantId;
   String? description;
+  int? merchantId;
   int? status;
-  String? imagename;
+  String? imageName;
 
   Data(
       {this.id,
         this.name,
-        this.merchantId,
         this.description,
+        this.merchantId,
         this.status,
-        this.imagename});
+        this.imageName});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    merchantId = json['merchant_id'];
     description = json['description'];
+    merchantId = json['merchant_id'];
     status = json['status'];
-    imagename = json['imagename'];
+    imageName = json['image_name'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['name'] = name;
-    data['merchant_id'] = merchantId;
-    data['description'] = description;
-    data['status'] = status;
-    data['imagename'] = imagename;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['description'] = this.description;
+    data['merchant_id'] = this.merchantId;
+    data['status'] = this.status;
+    data['image_name'] = this.imageName;
     return data;
   }
 }

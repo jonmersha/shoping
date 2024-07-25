@@ -5,10 +5,12 @@ import 'package:shop/RemoteService/controller/product_controller.dart';
 import 'package:shop/pages/components/cards/category_card.dart';
 import 'package:shop/pages/components/cards/product_card.dart';
 import 'package:shop/pages/forms/category_form.dart';
+import 'package:shop/pages/forms/product_create.dart';
 import 'package:shop/utils/app_constants.dart';
 
 class ProductList extends StatefulWidget {
-  const ProductList({super.key,});
+  final  category;
+  const ProductList({super.key, required this.category,});
   @override
   State<ProductList> createState() => _ProductListState();
 }
@@ -16,7 +18,8 @@ class ProductList extends StatefulWidget {
 class _ProductListState extends State<ProductList> {
   @override
   Widget build(BuildContext context) {
-    Get.find<ProductController>().getList('$PRODUCT/get');
+
+    Get.find<ProductController>().getList('$PRODUCT/category/${widget.category.id}');
     return Scaffold(
       body: GetBuilder<ProductController>(
         builder: (controller) {
@@ -37,7 +40,7 @@ class _ProductListState extends State<ProductList> {
         onPressed: (){
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => const CreateCategory(),
+              builder: (context) =>  CreateProduct(category: widget.category),
             ),
           );
         },

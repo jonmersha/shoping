@@ -7,6 +7,7 @@ const String BASE_URL = remote;
 const STOCKS = '/shopping/user';
 const CATEGORY = '/shopping/category';
 const PRODUCT = '/shopping/product';
+const imagePath ='$BASE_URL/shoping';
 
 
 
