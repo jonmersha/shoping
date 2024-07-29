@@ -9,8 +9,10 @@ import 'package:shop/pages/forms/product_create.dart';
 import 'package:shop/utils/app_constants.dart';
 
 class ProductList extends StatefulWidget {
+  final  path;
   final  category;
-  const ProductList({super.key, required this.category,});
+
+  const ProductList({super.key, required this.path,required this.category});
   @override
   State<ProductList> createState() => _ProductListState();
 }
@@ -19,8 +21,9 @@ class _ProductListState extends State<ProductList> {
   @override
   Widget build(BuildContext context) {
 
-    Get.find<ProductController>().getList('$PRODUCT/category/${widget.category.id}');
+    Get.find<ProductController>().getList(widget.path);
     return Scaffold(
+      appBar: AppBar(title:Text('Product List')),
       body: GetBuilder<ProductController>(
         builder: (controller) {
           return controller.isLoaded

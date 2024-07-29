@@ -50,10 +50,10 @@ class _CreateProductState extends State<CreateProduct> {
       "profit_margin": _profitMarginController.text,
       "min_threshold": int.parse(_minThresholdController.text),
     };
-    Get.find<ProductController>().addData('$PRODUCT/add', data);
+    Get.find<ProductController>().addData('$ADD/2', data);
+    print(data);
     navigateTo();
   }
-
    String? _selectedItem;
 
   final List<String> _dropdownItems = [
@@ -176,46 +176,10 @@ class _RegistrationState extends State<Registration> {
       body: GetBuilder<ProductController>(
         builder: (controller) {
           return controller.isPosted
-              ? Center(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'Your Product Is Registered',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w600),
-                      ),
-                      const Icon(
-                        Icons.done_outlined,
-                        size: 150,
-                        color: Colors.green,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                        },
-                        child: Container(
-                          height: 50,
-                          width: 200,
-                          decoration: BoxDecoration(
-                              color: Colors.green,
-                              borderRadius: BorderRadius.circular(30)),
-                          alignment: Alignment.center,
-                          child: const Text(
-                            'Go To Home',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                )
-              : const Center(
+              ? responseWidget(context)
+              : controller.isPostedError?responseWidgetError(context):
+
+          const Center(
                   child: CircularProgressIndicator(
                     color: Colors.green,
                   ),
@@ -223,5 +187,88 @@ class _RegistrationState extends State<Registration> {
         },
       ),
     );
+  }
+
+  Center responseWidget(BuildContext context) {
+    return Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Your Product Is Registered',
+                      style: TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.w600),
+                    ),
+                    const Icon(
+                      Icons.done_outlined,
+                      size: 150,
+                      color: Colors.green,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        height: 50,
+                        width: 200,
+                        decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(30)),
+                        alignment: Alignment.center,
+                        child: const Text(
+                          'Go To Home',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              );
+  }
+  Center responseWidgetError(BuildContext context) {
+    return Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Error Creating Your Products',
+                      style: TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.w600),
+                    ),
+                    const Icon(
+                      Icons.error_outline,
+                      size: 150,
+                      color: Colors.red,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        //Navigator.pop(context);
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        height: 50,
+                        width: 200,
+                        decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(30)),
+                        alignment: Alignment.center,
+                        child: const Text(
+                          'Back',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              );
   }
 }

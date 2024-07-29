@@ -16,9 +16,11 @@ class _CategoryCardState extends State<CategoryCard> {
       elevation: 5.0,
       child: GestureDetector(
         onTap: (){
+          //merchant product by category Path
+          late String path='$PRODUCT/${widget.category.id}/1';
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) =>  ProductList(category: widget.category,),//CreateProduct(category: widget.category),
+              builder: (context) =>  ProductList(path:path,category: widget.category,),//CreateProduct(category: widget.category),
             ),
           );
         },

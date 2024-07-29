@@ -15,7 +15,7 @@ class Shop extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white70),
-         useMaterial3: true,
+        useMaterial3: true,
       ),
       home: const Home(title: 'Product Category'),
     );
@@ -24,13 +24,16 @@ class Shop extends StatelessWidget {
 
 class Home extends StatefulWidget {
   const Home({super.key, required this.title});
+
   final String title;
+
   @override
   State<Home> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<Home> {
   int _counter = 0;
+
   void _incrementCounter() {
     setState(() {
       _counter++;
@@ -39,16 +42,25 @@ class _MyHomePageState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    Get.find<CategoryController>().getList('$CATEGORY/get');
+    Get.find<CategoryController>().getList('$DATA/0');
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Product Category'),
+      ),
       body: GetBuilder<CategoryController>(
         builder: (controller) {
           return controller.isLoaded
-              ? ListView.builder(
-                  itemCount: controller.list.length,
-                  itemBuilder: (context, index) {
-                    return  CategoryCard(category: controller.list[index],);
-                  })
+              ? (controller.list.length == 0)
+                  ? Center(
+                      child: Text('Please Create New Category'),
+                    )
+                  : ListView.builder(
+                      itemCount: controller.list.length,
+                      itemBuilder: (context, index) {
+                        return CategoryCard(
+                          category: controller.list[index],
+                        );
+                      })
               : const Center(
                   child: CircularProgressIndicator(
                     color: Colors.green,
@@ -57,7 +69,7 @@ class _MyHomePageState extends State<Home> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
+        onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => const CreateCategory(),

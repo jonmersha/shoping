@@ -41,7 +41,9 @@ class ProductController extends GetxController {
       _isPosted=true;
       update();
     } else {
-      _isPostedError=true;
+      if(response.statusCode == 200){
+        _isPostedError=true;
+      }
       _isPosted=false;
       update();
     }
