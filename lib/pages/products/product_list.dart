@@ -27,7 +27,7 @@ class _ProductListState extends State<ProductList> {
       body: GetBuilder<ProductController>(
         builder: (controller) {
           return controller.isLoaded
-              ? ListView.builder(
+              ? (controller.list.length==0)?Center(child: Text('No Products in this category please add one'),):ListView.builder(
               itemCount: controller.list.length,
               itemBuilder: (context, index) {
                 return  ProductCard(product: controller.list[index],);

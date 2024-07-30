@@ -49,7 +49,7 @@ class _CreateCategoryState extends State<CreateCategory> {
     };
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => RegistrationPage(path: '$CATEGORY/add',data:data, message: 'Category Created!!'),
+        builder: (context) => RegistrationPage(path: '$ADD/0',data:data, message: 'Category Created!!'),
       ),
     );
 
