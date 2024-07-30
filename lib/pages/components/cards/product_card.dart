@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop/model/product.dart';
+import 'package:shop/pages/forms/new_stock.dart';
 import 'package:shop/pages/products/new_stock.dart';
 import 'package:shop/pages/products/product_update.dart';
 import 'package:shop/pages/products/stock_entry_list.dart';
@@ -78,7 +79,7 @@ class _ProductCardState extends State<ProductCard> {
               InkWell(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => StockEntryForm()));
+                        builder: (context) => NewStockForm(product: widget.product,)));
                   },
                   child: pressButton(text: 'New Stock')),
               SizedBox(height: 10),

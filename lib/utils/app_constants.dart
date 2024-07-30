@@ -8,7 +8,7 @@ const DATA = '/shopping/data';
 const ADD = '/shopping/add';
 
 const COUNT = '/shopping/count/';
-const Search = '/shopping/count/';
+const Search = '/shopping/count';
 
 const STOCKS = '/shopping/user';
 const CATEGORY = '/shopping/category';
