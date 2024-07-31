@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop/RemoteService/controller/product_controller.dart';
-import 'package:shop/components/title_text_widget.dart';
+import 'package:shop/components/text_form_field.dart';
 import 'package:shop/utils/app_constants.dart';
 
 class CreateProduct extends StatefulWidget {
@@ -20,8 +20,6 @@ class _CreateProductState extends State<CreateProduct> {
   final TextEditingController _productNameController = TextEditingController();
   final TextEditingController _descriptionsController = TextEditingController();
   final TextEditingController _quantityController = TextEditingController();
-  final TextEditingController _unitsOfMeasureController =
-      TextEditingController();
   final TextEditingController _unitPriceController = TextEditingController();
   final TextEditingController _minThresholdController = TextEditingController();
   final TextEditingController _profitMarginController = TextEditingController();
@@ -31,7 +29,6 @@ class _CreateProductState extends State<CreateProduct> {
     _productNameController.dispose();
     _descriptionsController.dispose();
     _quantityController.dispose();
-    _unitsOfMeasureController.dispose();
     _unitPriceController.dispose();
     _minThresholdController.dispose();
     _profitMarginController.dispose();
@@ -45,13 +42,12 @@ class _CreateProductState extends State<CreateProduct> {
       "product_name": _productNameController.text,
       "descriptions": _descriptionsController.text,
       "quantity": double.parse(_quantityController.text),
-      "units_of_measure": _unitsOfMeasureController.text,
+      "units_of_measure": _selectedItem,
       "unit_price": double.parse(_unitPriceController.text),
       "profit_margin": _profitMarginController.text,
       "min_threshold": int.parse(_minThresholdController.text),
     };
     Get.find<ProductController>().addData('$ADD/2', data);
-    print(data);
     navigateTo();
   }
    String? _selectedItem;
@@ -59,8 +55,7 @@ class _CreateProductState extends State<CreateProduct> {
   final List<String> _dropdownItems = [
     'KG',
     'Pcs',
-    'Liter',
-    'Quintal',
+    'Litre'
   ];
 
   @override
@@ -84,37 +79,54 @@ class _CreateProductState extends State<CreateProduct> {
                   ),
                   child: Text(
                       'Product Category:${widget.category.name.toString()}'),),
-              //Text('Product Category:${widget.category.name.toString()}'),
 
-              buildTextFormField(
+              buildTextFormFieldText(
                   _productNameController, 'Product Name', 'Enter Name'),
-              buildTextFormField(_descriptionsController, 'Product Description',
+              buildTextFormFieldText(_descriptionsController, 'Product Description',
                   'Enter Descriptions',
                   maxLines: 3),
-              DropdownButton<String>(
-                value: _selectedItem,
-                hint: Text('Select an item'),
-                items: _dropdownItems.map((String item) {
-                  return DropdownMenuItem<String>(
-                    value: item,
-                    child: Text(item),
-                  );
-                }).toList(),
-                onChanged: (String? value) {
-                  setState(() {
-                    _selectedItem = value;
-                  });
-                },),
-              buildTextFormField(
-                  _unitsOfMeasureController, 'Units Of Measure', 'Pcs'),
-              buildTextFormField(_quantityController, 'Quantity',
-                  'inter product quantity(1,2,3)'),
-              buildTextFormField(
-                  _unitPriceController, 'Unit Price', 'Enter Unit price'),
-              buildTextFormField(_profitMarginController, 'Profit Margin',
-                  'inter profit margin %'),
-              buildTextFormField(
+              Row(
+                children: [
+                  DropdownButton<String>(
+                    value: _selectedItem,
+                    hint: const Text('Units'),
+                    items: _dropdownItems.map((String item) {
+                      return DropdownMenuItem<String>(
+                        value: item,
+                        child: Text(item),
+                      );
+                    }).toList(),
+                    onChanged: (String? value) {
+                      setState(() {
+                        _selectedItem = value;
+                      });
+                    },),
+                  const SizedBox(width: 10,),
+                  Flexible(
+                    child: buildTextFormFieldNumber(_quantityController, 'Quantity',
+                        'inter product quantity(1,2,3)'),
+                  ),
+                ],
+              ),
+
+
+             Row(children: [
+               Flexible(
+                 child: buildTextFormFieldNumber(
+                     _unitPriceController, 'Unit Price', 'Enter Unit price'),
+               ),
+               const SizedBox(width: 10,),
+
+               Flexible(
+                 child: buildTextFormFieldNumber(_profitMarginController, 'Profit Margin',
+                     'inter profit margin %'),
+               ),
+
+
+             ],),
+              buildTextFormFieldNumber(
                   _minThresholdController, 'Threshold', 'inter min threshold'),
+
 
               const SizedBox(height: 20),
               ElevatedButton(

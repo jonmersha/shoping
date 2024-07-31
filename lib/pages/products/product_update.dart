@@ -6,8 +6,8 @@ class ProductUpdate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Product Update'),),
-      body: Center(child: Text('Product Setup'),),
+      appBar: AppBar(title: const Text('Product Update'),),
+      body: const Center(child: Text('Product Setup'),),
     );
   }
 }

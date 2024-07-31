@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:shop/model/Store.dart';
 
 class StoreDropdown extends StatefulWidget {
   final List<dynamic> merchantStore;
@@ -11,15 +9,14 @@ class StoreDropdown extends StatefulWidget {
 }
 
 class _StoreDropdownState extends State<StoreDropdown> {
-  dynamic? _selectedStore;
-
+  dynamic _selectedStore;
 
   @override
   Widget build(BuildContext context) {
     List<dynamic> merchantStore =widget.merchantStore;
 
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 6.0),
+      padding: const EdgeInsets.symmetric(horizontal: 6.0),
       decoration:  BoxDecoration(
         border: Border.all(color: Colors.grey, width: 1),
         borderRadius: BorderRadius.circular(5),
@@ -28,14 +25,14 @@ class _StoreDropdownState extends State<StoreDropdown> {
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<dynamic>(
-          icon: Icon(Icons.arrow_downward, color: Colors.blue),
+          icon: const Icon(Icons.arrow_downward, color: Colors.blue),
           iconSize: 24,
           elevation: 16,
-          hint:   Text('Select Your Store'),
+          hint:   const Text('Select Your Store'),
           value: _selectedStore,
           //dropdownColor: Colors.blue[100],
-          style: TextStyle(color: Colors.blue, fontSize: 16),
-          onChanged: (dynamic? newValue) {
+          style: const TextStyle(color: Colors.blue, fontSize: 16),
+          onChanged: (dynamic newValue) {
             setState(() {
               _selectedStore = newValue!;
               print(_selectedStore.name!);

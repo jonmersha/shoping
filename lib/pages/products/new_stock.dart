@@ -8,7 +8,7 @@ class StockEntryForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Stock Entry'),),
+      appBar: AppBar(title: const Text('Stock Entry'),),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -17,21 +17,21 @@ class StockEntryForm extends StatelessWidget {
               child:  Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(children: [
+                  const Column(children: [
                     Text('Product Name:',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w400),),
                     Text('Product Description:',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w400),),
 
                   ],),
                   Column(children: [
-                     Text('${product.descriptions.toString()}'),
-                     Text('${product.descriptions.toString()}'),
+                     Text(product.descriptions.toString()),
+                     Text(product.descriptions.toString()),
 
                   ],),
 
 
               ],),
             ),
-            Text('Stock Item'),
+            const Text('Stock Item'),
             NewStockForm(product:product),
           ],
         ),

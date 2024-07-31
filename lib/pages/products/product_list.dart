@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shop/RemoteService/controller/category_controller.dart';
 import 'package:shop/RemoteService/controller/product_controller.dart';
-import 'package:shop/pages/components/cards/category_card.dart';
 import 'package:shop/pages/components/cards/product_card.dart';
-import 'package:shop/pages/forms/category_form.dart';
+// import 'package:shop/pages/components/cards/product_card_with_image.dart';
 import 'package:shop/pages/forms/product_create.dart';
-import 'package:shop/utils/app_constants.dart';
 
 class ProductList extends StatefulWidget {
   final  path;
@@ -23,11 +20,11 @@ class _ProductListState extends State<ProductList> {
 
     Get.find<ProductController>().getList(widget.path);
     return Scaffold(
-      appBar: AppBar(title:Text('Product List')),
+      appBar: AppBar(title:const Text('Product List')),
       body: GetBuilder<ProductController>(
         builder: (controller) {
           return controller.isLoaded
-              ? (controller.list.length==0)?Center(child: Text('No Products in this category please add one'),):ListView.builder(
+              ? (controller.list.isEmpty)?const Center(child: Text('No Products in this category please add one'),):ListView.builder(
               itemCount: controller.list.length,
               itemBuilder: (context, index) {
                 return  ProductCard(product: controller.list[index],);

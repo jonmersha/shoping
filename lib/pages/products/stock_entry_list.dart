@@ -6,8 +6,8 @@ class StockEntryList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Stock Entry List'),),
-      body: Center(child: Text('Stock Entry List'),),
+      appBar: AppBar(title: const Text('Stock Entry List'),),
+      body: const Center(child: Text('Stock Entry List'),),
     );
   }
 }

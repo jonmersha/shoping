@@ -6,13 +6,13 @@ class Product {
     if (json['Data'] != null) {
       data = <Data>[];
       json['Data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(Data.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (this.data != null) {
       data['Data'] = this.data!.map((v) => v.toJson()).toList();
     }
@@ -64,19 +64,19 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['category'] = this.category;
-    data['product_name'] = this.productName;
-    data['descriptions'] = this.descriptions;
-    data['merchant_id'] = this.merchantId;
-    data['quantity'] = this.quantity;
-    data['units_of_measure'] = this.unitsOfMeasure;
-    data['unit_price'] = this.unitPrice;
-    data['min_threshold'] = this.minThreshold;
-    data['profit_margin'] = this.profitMargin;
-    data['discounted_percentage'] = this.discountedPercentage;
-    data['image_path'] = this.imagePath;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['category'] = category;
+    data['product_name'] = productName;
+    data['descriptions'] = descriptions;
+    data['merchant_id'] = merchantId;
+    data['quantity'] = quantity;
+    data['units_of_measure'] = unitsOfMeasure;
+    data['unit_price'] = unitPrice;
+    data['min_threshold'] = minThreshold;
+    data['profit_margin'] = profitMargin;
+    data['discounted_percentage'] = discountedPercentage;
+    data['image_path'] = imagePath;
     return data;
   }
 }

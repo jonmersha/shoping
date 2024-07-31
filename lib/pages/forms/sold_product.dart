@@ -6,18 +6,17 @@ import 'package:shop/RemoteService/controller/store_controller.dart';
 import 'package:shop/components/text_form_field.dart';
 import 'package:shop/components/text_widget.dart';
 import 'package:shop/utils/app_constants.dart';
-import 'dart:math';
 
-class NewStockForm extends StatefulWidget {
+class SoldProduct extends StatefulWidget {
   final product;
 
-  const NewStockForm({super.key, required this.product});
+  const SoldProduct({super.key, required this.product});
 
   @override
-  _NewStockFormState createState() => _NewStockFormState();
+  _SoldProductState createState() => _SoldProductState();
 }
 
-class _NewStockFormState extends State<NewStockForm> {
+class _SoldProductState extends State<SoldProduct> {
   dynamic _selectedStore;
   final _formKey = GlobalKey<FormState>();
   // Form fields controllers
@@ -51,6 +50,7 @@ class _NewStockFormState extends State<NewStockForm> {
     };
 
     Get.find<StockBinController>().addData('$ADD/4', data);
+    //print(data);
     navigateTo();
   }
 
@@ -64,8 +64,6 @@ class _NewStockFormState extends State<NewStockForm> {
    // _quantityController.text = '0';
     double sellingPrice= price(double.parse(widget.product.profitMargin.toString()),double.parse(widget.product.unitPrice.toString()));
     double withVat=(1+0.15)*sellingPrice;
-    String val=withVat.toStringAsFixed(2);
-    print(val);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Stock Card'),
@@ -95,7 +93,7 @@ class _NewStockFormState extends State<NewStockForm> {
                 infoText(label:'Unit Price',text:widget.product.unitPrice),
                 infoText(label:'Profit Margin %',text:widget.product.profitMargin),
                 infoText(label:'Selling Price',text:'$sellingPrice'),
-                infoText(label:'Selling Price+VAT 15%',text:'$val'),
+                infoText(label:'Selling Price+VAT 15%',text:'$withVat'),
               ],
             ),
           ),
@@ -116,6 +114,8 @@ class _NewStockFormState extends State<NewStockForm> {
                     buildDropdownButton(controller),
                   ),
                 )
+
+
                     : Container(
                         child: const Text('is Empty Add Your Store'),
                       );

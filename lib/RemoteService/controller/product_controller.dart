@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:shop/RemoteService/repository/repo_service.dart';
-import 'package:shop/model/UserAcc.dart';
+
 import 'package:shop/model/product.dart';
 
 
@@ -41,7 +41,7 @@ class ProductController extends GetxController {
       _isPosted=true;
       update();
     } else {
-      if(response.statusCode == 200){
+      if(response.statusCode == 500){
         _isPostedError=true;
       }
       _isPosted=false;

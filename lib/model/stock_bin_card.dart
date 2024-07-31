@@ -1,19 +1,19 @@
-class StockBinCard {
+class StockBin {
   List<Data>? data;
 
-  StockBinCard({this.data});
+  StockBin({this.data});
 
-  StockBinCard.fromJson(Map<String, dynamic> json) {
+  StockBin.fromJson(Map<String, dynamic> json) {
     if (json['Data'] != null) {
       data = <Data>[];
       json['Data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(Data.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (this.data != null) {
       data['Data'] = this.data!.map((v) => v.toJson()).toList();
     }
@@ -62,18 +62,18 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['product_id'] = this.productId;
-    data['previous_quantity'] = this.previousQuantity;
-    data['current_quantity'] = this.currentQuantity;
-    data['stock_balance'] = this.stockBalance;
-    data['merchant_id'] = this.merchantId;
-    data['store_id'] = this.storeId;
-    data['previous_price'] = this.previousPrice;
-    data['current_price'] = this.currentPrice;
-    data['reg_date'] = this.regDate;
-    data['registered_by'] = this.registeredBy;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['product_id'] = productId;
+    data['previous_quantity'] = previousQuantity;
+    data['current_quantity'] = currentQuantity;
+    data['stock_balance'] = stockBalance;
+    data['merchant_id'] = merchantId;
+    data['store_id'] = storeId;
+    data['previous_price'] = previousPrice;
+    data['current_price'] = currentPrice;
+    data['reg_date'] = regDate;
+    data['registered_by'] = registeredBy;
     return data;
   }
 }

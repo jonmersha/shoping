@@ -14,8 +14,9 @@ class Shop extends StatelessWidget {
       title: 'shop',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white70),
-        useMaterial3: true,
+        colorScheme: ColorScheme.light(),//fromSeed(seedColor: Colors.white24),
+        // cardColor: Colors.white,
+       useMaterial3: true,
       ),
       home: const Home(title: 'Product Category'),
     );
@@ -45,13 +46,13 @@ class _MyHomePageState extends State<Home> {
     Get.find<CategoryController>().getList('$DATA/0');
     return Scaffold(
       appBar: AppBar(
-        title: Text('Product Category'),
+        title: const Text('Product Category'),
       ),
       body: GetBuilder<CategoryController>(
         builder: (controller) {
           return controller.isLoaded
-              ? (controller.list.length == 0)
-                  ? Center(
+              ? (controller.list.isEmpty)
+                  ? const Center(
                       child: Text('Please Create New Category'),
                     )
                   : ListView.builder(
