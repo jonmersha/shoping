@@ -12,57 +12,57 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
 
 
-  void dialogBox(String message) {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return Scaffold(
-            backgroundColor: Colors.grey[500],
-            body: Center(
-              child: SafeArea(
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.error_outline,
-                        size: 100,
-                        color: Colors.red,
-                      ),
-                      Text(
-                        message,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25,
-                            color: Colors.red),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: Container(
-                              width: 300,
-                              alignment: Alignment.center,
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(25),
-                                  color: Colors.black),
-                              child: const Text(
-                                'Ok',
-                                style:
-                                    TextStyle(color: Colors.blue, fontSize: 25),
-                              )))
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          );
-        });
-  }
+  // void dialogBox(String message) {
+  //   showDialog(
+  //       context: context,
+  //       builder: (context) {
+  //         return Scaffold(
+  //           backgroundColor: Colors.grey[500],
+  //           body: Center(
+  //             child: SafeArea(
+  //               child: Center(
+  //                 child: Column(
+  //                   mainAxisAlignment: MainAxisAlignment.center,
+  //                   children: [
+  //                     const Icon(
+  //                       Icons.error_outline,
+  //                       size: 100,
+  //                       color: Colors.red,
+  //                     ),
+  //                     Text(
+  //                       message,
+  //                       style: const TextStyle(
+  //                           fontWeight: FontWeight.bold,
+  //                           fontSize: 25,
+  //                           color: Colors.red),
+  //                     ),
+  //                     const SizedBox(
+  //                       height: 10,
+  //                     ),
+  //                     GestureDetector(
+  //                         onTap: () {
+  //                           Navigator.pop(context);
+  //                         },
+  //                         child: Container(
+  //                             width: 300,
+  //                             alignment: Alignment.center,
+  //                             padding: const EdgeInsets.all(10),
+  //                             decoration: BoxDecoration(
+  //                                 borderRadius: BorderRadius.circular(25),
+  //                                 color: Colors.black),
+  //                             child: const Text(
+  //                               'Ok',
+  //                               style:
+  //                                   TextStyle(color: Colors.blue, fontSize: 25),
+  //                             )))
+  //                   ],
+  //                 ),
+  //               ),
+  //             ),
+  //           ),
+  //         );
+  //       });
+  // }
 
 
 
