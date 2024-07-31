@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop/RemoteService/controller/product_controller.dart';
 class ProductRegistration extends StatefulWidget {
-  final data;
-  final path;
-  const ProductRegistration({super.key, this.data, this.path});
+  // final data;
+  // final path;
+  const ProductRegistration({super.key});
   @override
   State<ProductRegistration> createState() =>
       _ProductRegistrationState();
@@ -13,7 +13,6 @@ class ProductRegistration extends StatefulWidget {
 class _ProductRegistrationState extends State<ProductRegistration> {
   @override
   Widget build(BuildContext context) {
-    // Get.find<ProductController>().addData(widget.path, widget.data);
     return Scaffold(
       body: GetBuilder<ProductController>(
         builder: (controller) {
@@ -24,7 +23,7 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                        'Your Product Is Registered',
+                        'Registered successfully',
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.w600),
                       ),
@@ -36,7 +35,7 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                       InkWell(
                         onTap: (){
                           Navigator.pop(context);
-                          Navigator.pop(context);
+                         // Navigator.pop(context);
                         },
                         child: Container(
                           height: 50,

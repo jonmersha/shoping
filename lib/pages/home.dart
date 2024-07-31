@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop/RemoteService/controller/category_controller.dart';
+import 'package:shop/auth/fire_auth.dart';
 import 'package:shop/pages/components/cards/category_card.dart';
 import 'package:shop/pages/forms/category_form.dart';
 import 'package:shop/utils/app_constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Shop extends StatelessWidget {
   const Shop({super.key});
@@ -13,12 +15,19 @@ class Shop extends StatelessWidget {
     return MaterialApp(
       title: 'shop',
       debugShowCheckedModeBanner: false,
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const AuthGate(),
+        '/home': (context) => const Home(
+              title: 'Product Category',
+            ),
+      },
       theme: ThemeData(
-        colorScheme: ColorScheme.light(),//fromSeed(seedColor: Colors.white24),
+        colorScheme: ColorScheme.light(), //fromSeed(seedColor: Colors.white24),
         // cardColor: Colors.white,
-       useMaterial3: true,
+        useMaterial3: true,
       ),
-      home: const Home(title: 'Product Category'),
+      // home: const Home(title: 'Product Category'),
     );
   }
 }
@@ -35,51 +44,91 @@ class Home extends StatefulWidget {
 class _MyHomePageState extends State<Home> {
   int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     Get.find<CategoryController>().getList('$DATA/0');
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Product Category'),
-      ),
-      body: GetBuilder<CategoryController>(
-        builder: (controller) {
-          return controller.isLoaded
-              ? (controller.list.isEmpty)
-                  ? const Center(
-                      child: Text('Please Create New Category'),
-                    )
-                  : ListView.builder(
-                      itemCount: controller.list.length,
-                      itemBuilder: (context, index) {
-                        return CategoryCard(
-                          category: controller.list[index],
-                        );
-                      })
-              : const Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.green,
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      borderRadius: BorderRadius.circular(10)),
+                  padding: const EdgeInsets.all(12),
+                  child: Icon(
+                    Icons.notifications,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
-                );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => const CreateCategory(),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    FirebaseAuth.instance.signOut();
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).cardColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    padding: const EdgeInsets.all(12),
+                    child: Icon(
+                      Icons.logout,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                ),
+              ],
             ),
-          );
-        },
-        tooltip: 'Add New Category',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+            // InkWell(
+            //     onTap: (){
+            //       FirebaseAuth.instance.signOut();
+            //     },
+            //     child: Icon(
+            //       height: 100,
+            //       child: Text('Homera'),)),
+            Flexible(
+              child: GetBuilder<CategoryController>(
+                builder: (controller) {
+                  return controller.isLoaded
+                      ? (controller.list.isEmpty)
+                          ? const Center(
+                              child: Text('Please Create New Category'),
+                            )
+                          : ListView.builder(
+                              itemCount: controller.list.length,
+                              itemBuilder: (context, index) {
+                                return CategoryCard(
+                                  category: controller.list[index],
+                                );
+                              })
+                      : const Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.green,
+                          ),
+                        );
+                },
+              ),
+            ),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const CreateCategory(),
+              ),
+            );
+          },
+          tooltip: 'Add new category',
+          child: const Icon(Icons.add),
+        ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }
