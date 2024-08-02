@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shop/auth/check_user.dart';
 import 'package:shop/auth/login_page.dart';
 import 'package:shop/auth/shop_profile.dart';
 
@@ -13,8 +14,8 @@ class AuthGate extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           //print(snapshot.data);
-          return Profile(data: snapshot,);
-
+          //return Profile(data: snapshot,);
+      return CheckUser(uid:snapshot.data!.uid.toString());
           //return  Home(snapshot:snapshot);
         }
         return const LoginPage();
