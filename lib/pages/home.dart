@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:shop/RemoteService/controller/category_controller.dart';
 import 'package:shop/auth/fire_auth.dart';
 import 'package:shop/pages/components/cards/category_card.dart';
+import 'package:shop/pages/components/header.dart';
 import 'package:shop/pages/forms/category_form.dart';
 import 'package:shop/utils/app_constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,9 +19,6 @@ class Shop extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const AuthGate(),
-        '/home': (context) => const Home(
-              title: 'Product Category',
-            ),
       },
       theme: ThemeData(
         colorScheme: ColorScheme.light(), //fromSeed(seedColor: Colors.white24),
@@ -33,9 +31,8 @@ class Shop extends StatelessWidget {
 }
 
 class Home extends StatefulWidget {
-  const Home({super.key, required this.title});
-
-  final String title;
+  final AsyncSnapshot<User?> snapshot;
+  const Home({super.key,required this.snapshot});
 
   @override
   State<Home> createState() => _MyHomePageState();
@@ -46,52 +43,13 @@ class _MyHomePageState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+
     Get.find<CategoryController>().getList('$DATA/0');
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      borderRadius: BorderRadius.circular(10)),
-                  padding: const EdgeInsets.all(12),
-                  child: Icon(
-                    Icons.notifications,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    FirebaseAuth.instance.signOut();
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).cardColor,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    padding: const EdgeInsets.all(12),
-                    child: Icon(
-                      Icons.logout,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            // InkWell(
-            //     onTap: (){
-            //       FirebaseAuth.instance.signOut();
-            //     },
-            //     child: Icon(
-            //       height: 100,
-            //       child: Text('Homera'),)),
+             HeaderSection(fullName:'${widget.snapshot.data!.displayName}',imageUrl: widget.snapshot.data!.photoURL,),
             Flexible(
               child: GetBuilder<CategoryController>(
                 builder: (controller) {
@@ -117,18 +75,18 @@ class _MyHomePageState extends State<Home> {
             ),
           ],
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const CreateCategory(),
-              ),
-            );
-          },
-          tooltip: 'Add new category',
-          child: const Icon(Icons.add),
-        ), // This trailing comma makes auto-formatting nicer for build methods.
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const CreateCategory(),
+            ),
+          );
+        },
+        tooltip: 'Add new category',
+        child: const Icon(Icons.add),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

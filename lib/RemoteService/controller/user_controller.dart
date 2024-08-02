@@ -21,7 +21,6 @@ class UserController extends GetxController {
 
   Future<void> getList(String path) async {
     Response response = await serviceRepo.getAll(path);
-    //print(response.body);
     if (response.statusCode == 200) {
       _list = [];
       _list.addAll(User.fromJson(response.body).data!);
@@ -33,9 +32,7 @@ class UserController extends GetxController {
     }
   }
   Future<void> addData(String path,dynamic data) async {
-    //print('Post Sent');
     Response response = await serviceRepo.addData(path,data);
-    print(response.statusText);
     if (response.statusCode == 200) {
       _isPosted=true;
       update();

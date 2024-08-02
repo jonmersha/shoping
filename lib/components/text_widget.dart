@@ -1,9 +1,31 @@
 import 'package:flutter/material.dart';
 
 Widget infoText({required text, required String label}) => Row(
-  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  children: [
-        Flexible(child: Text('$label:',style: const TextStyle(fontWeight: FontWeight.w600,fontSize: 20),)),
-        Text('$text',style: const TextStyle(fontWeight: FontWeight.w300,fontSize: 18),),
-  ],
-);
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Flexible(
+            child: Text(
+          '$label:',
+          style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+        )),
+        Text(
+          '$text',
+          style: const TextStyle(fontWeight: FontWeight.w300, fontSize: 18),
+        ),
+      ],
+    );
+
+Widget labelText({required text, required String label}) => Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Flexible(
+            child: Text(
+          '$label:',
+          style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+        )),
+        Text(
+          '$text',
+          style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+        ),
+      ],
+    );
