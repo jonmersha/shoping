@@ -48,7 +48,7 @@ class _MyHomePageState extends State<Home> {
       body: SafeArea(
         child: Column(
           children: [
-             HeaderSection(fullName:'${widget.snapshot.data!.displayName}',imageUrl: widget.snapshot.data!.photoURL,),
+             HeaderSection(fullName:'${widget.snapshot.data!.displayName}',imageUrl: widget.snapshot.data!.photoURL.toString(),),
             Flexible(
               child: GetBuilder<CategoryController>(
                 builder: (controller) {

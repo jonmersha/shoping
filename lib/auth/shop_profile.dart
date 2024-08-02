@@ -8,6 +8,11 @@ import 'package:shop/components/text_widget.dart';
 import 'package:shop/pages/home.dart';
 import 'package:shop/utils/app_constants.dart';
 
+/*
+* Before coming to this sections in auth screen the
+*   Search The users using email in the database
+*     if exist add the id to id holder and navigate to the Home screen */
+
 class Profile extends StatefulWidget {
   final AsyncSnapshot<User?> data;
 

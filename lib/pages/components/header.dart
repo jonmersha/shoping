@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class HeaderSection extends StatelessWidget {
 final String fullName;
-final imageUrl;
+final String imageUrl;
   const HeaderSection({super.key, required  this.fullName, required this.imageUrl});
 
   @override
