@@ -39,7 +39,6 @@ class Home extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<Home> {
-  int _counter = 0;
 
   @override
   Widget build(BuildContext context) {

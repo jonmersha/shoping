@@ -18,7 +18,6 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  dynamic _selectedStore;
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _fullNameController = TextEditingController();
@@ -26,7 +25,6 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    final data = {'uid': 1};
     _fullNameController.text = widget.data.data!.displayName.toString();
     _phoneNumberController.text = widget.data.data!.phoneNumber.toString();
 

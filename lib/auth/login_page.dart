@@ -1,5 +1,4 @@
 import 'package:shop/auth/auth_service.dart';
-import 'package:shop/widget/common/square_tile.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
