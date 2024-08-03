@@ -15,6 +15,7 @@ class AuthGate extends StatelessWidget {
         if (snapshot.hasData) {
           //print(snapshot.data);
           //return Profile(data: snapshot,);
+          //FutureBuilder(future: null, builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {  },);
       return CheckUser(uid:snapshot.data!.uid.toString());
           //return  Home(snapshot:snapshot);
         }

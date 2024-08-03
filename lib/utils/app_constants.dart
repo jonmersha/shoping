@@ -8,6 +8,10 @@ const int merchant_id=1;
 const DATA = '/shopping/data';
 const ADD = '/shopping/add';
 
+const USER = '/shopping/user';
+
+
+
 const COUNT = '/shopping/count/';
 const Search = '/shopping/count';
 
