@@ -1,4 +1,3 @@
-import 'package:shop/main/widget/main/apps_menu.dart';
 import 'package:shop/main/widget/main/top_button.dart';
 // import 'package:shop/widget/home/header_info.dart';
 // import 'package:shop/widget/home/search_bar.dart';

@@ -23,7 +23,7 @@ Future<void> main() async {
         providers: [
           ChangeNotifierProvider(create: (_) => DataProvider()),
         ],
-        child: Shop(),
+        child: const Shop(),
       ),
 
       );

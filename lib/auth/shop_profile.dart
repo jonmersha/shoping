@@ -1,11 +1,10 @@
 //On succefull logon to the using
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:shop/RemoteService/controller/user_controller.dart';
+import 'package:shop/auth/check_user.dart';
+import 'package:shop/auth/profile_creation_response.dart';
 import 'package:shop/components/text_form_field.dart';
 import 'package:shop/components/text_widget.dart';
-import 'package:shop/pages/home.dart';
 import 'package:shop/utils/app_constants.dart';
 
 /*
@@ -14,9 +13,9 @@ import 'package:shop/utils/app_constants.dart';
 *     if exist add the id to id holder and navigate to the Home screen */
 
 class Profile extends StatefulWidget {
-  final AsyncSnapshot<User?> data;
+  final User? user;
 
-  const Profile({super.key, required this.data});
+  const Profile({super.key, required  this.user});
 
   @override
   State<Profile> createState() => _ProfileState();
@@ -30,8 +29,12 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    _fullNameController.text = widget.data.data!.displayName.toString();
-    _phoneNumberController.text = widget.data.data!.phoneNumber.toString();
+    _fullNameController.text = widget.user!.displayName.toString();
+    String phone=widget.user!.phoneNumber.toString();
+    if(phone!='null'){
+      _phoneNumberController.text=widget.user!.phoneNumber.toString();
+    }
+
 
     //1-checking the users for users on shopping system
     //2-if users are there proceed to the applications path
@@ -43,7 +46,7 @@ class _ProfileState extends State<Profile> {
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Container(
@@ -53,7 +56,7 @@ class _ProfileState extends State<Profile> {
                 color: Colors.grey,
                 image: DecorationImage(
                     image: NetworkImage(
-                      '${widget.data.data!.photoURL.toString()}',
+                      widget.user!.photoURL.toString(),
                     ),
                     fit: BoxFit.fill),
                 borderRadius: BorderRadius.circular(200),
@@ -61,35 +64,38 @@ class _ProfileState extends State<Profile> {
             ),
             Flexible(
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Form(
                   key: _formKey,
                   child: ListView(children: <Widget>[
                     const SizedBox(
                       height: 10,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     labelText(
                         label: 'Email',
-                        text: '   ${widget.data.data!.email.toString()}'),
+                        text: '   ${widget.user!.email.toString()}'),
                     buildTextFormFieldText(
                         _fullNameController, 'Full Name', 'Edit Full Name'),
                     buildTextFormFieldNumber(_phoneNumberController, 'Phone',
                         'add/edit phone number'),
-                    SizedBox(height: 20),
-                    Row(
+                    const SizedBox(height: 20),
+                    Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         InkWell(
                           onTap: (){
-                            navigateTo();
+                            createCustomer();
                           },
-                            child: buildButton('Skip this Step')),
+                            child: buildButton('Continue as Customer')),
+                        const SizedBox(height: 20,),
                         InkWell(
-                            onTap: (){},
-                            child: buildButton('Create My profile'))
+                            onTap: (){
+                              createMerchant();
+                            },
+                            child: buildButton('Continue as Seller'))
                       ],
                     )
                   ]),
@@ -105,13 +111,13 @@ class _ProfileState extends State<Profile> {
   Container buildButton(String label) {
     return Container(
                         alignment: Alignment.center,
-                        padding: EdgeInsets.all(15),
+                        padding: const EdgeInsets.all(15),
                         //height: 40,
                         decoration: BoxDecoration(
                           color: Colors.green.shade300,
                           borderRadius: BorderRadius.circular(20)
                         ),
-                        child: Text(label,style: TextStyle(fontSize: 16,fontWeight:FontWeight.w600),),
+                        child: Text(label,style: const TextStyle(fontSize: 16,fontWeight:FontWeight.w600),),
                       );
   }
 
@@ -119,19 +125,27 @@ class _ProfileState extends State<Profile> {
   void dispose() {
     _fullNameController.dispose();
     _phoneNumberController.dispose();
+    super.dispose();
   }
 
-  void sendCreate() {
+  void createMerchant() {
     final Map<String, dynamic> data = {
-      "user_email": widget.data.data!.email.toString(),
+      "user_email": widget.user!.email.toString(),
       "phone": _phoneNumberController.text,
       "full_name": _fullNameController.text,
-      "user_type":"merchant",
-      "uid": widget.data.data!.uid.toString(),
+      "user_type":0,
+      "uid": widget.user!.uid.toString(),
     };
 
-    Get.find<UserController>().addData('$ADD/4', data);
+    //Get.find<UserController>().addData('$ADD/5', data);
     //navigateTo();
+
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => ProfileCreationResponse(path: '$ADD/5',data:data, message: 'Your Profile Has Ben Created successfully !!'),
+      ),
+    );
+
     //listen for the response
     //request user id by email
     //update the users Id in common
@@ -139,16 +153,22 @@ class _ProfileState extends State<Profile> {
 
   }
 
-    void sendSkip() {
+    void createCustomer() {
       final Map<String, dynamic> data = {
-        "email": widget.data.data!.email.toString(),
-        "phone": widget.data.data!.phoneNumber.toString(),
-        "full_name": widget.data.data!.displayName.toString(),
-        "uid": widget.data.data!.uid.toString(),
+        "user_email": widget.user!.email.toString(),
+        "phone": _phoneNumberController.text,
+        "full_name": widget.user!.displayName.toString(),
+        "user_type":1,
+        "uid": widget.user!.uid.toString(),
       };
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => ProfileCreationResponse(path: '$ADD/5',data:data, message: 'Your Profile Has Ben Created successfully !!'),
+        ),
+      );
 
-    Get.find<UserController>().addData('$ADD/4', data);
-    navigateTo();
+    // Get.find<UserController>().addData('$ADD/5', data);
+    // navigateTo();
   }
 
   //Skip and loading the customer page
@@ -163,7 +183,7 @@ class _ProfileState extends State<Profile> {
   navigateTo() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) =>  Home(snapshot:widget.data),
+        builder: (context) =>  CheckUser(user:widget.user),
       ),
     );
   }

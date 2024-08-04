@@ -21,7 +21,7 @@ class Shop extends StatelessWidget {
         '/': (context) => const AuthGate(),
       },
       theme: ThemeData(
-        colorScheme: ColorScheme.light(), //fromSeed(seedColor: Colors.white24),
+        colorScheme: const ColorScheme.light(), //fromSeed(seedColor: Colors.white24),
         // cardColor: Colors.white,
         useMaterial3: true,
       ),
@@ -31,8 +31,9 @@ class Shop extends StatelessWidget {
 }
 
 class Home extends StatefulWidget {
-  final AsyncSnapshot<User?> snapshot;
-  const Home({super.key,required this.snapshot});
+  final User? user;
+  final userModel;
+  const Home({super.key,required this.user,required this.userModel});
 
   @override
   State<Home> createState() => _MyHomePageState();
@@ -40,15 +41,20 @@ class Home extends StatefulWidget {
 
 class _MyHomePageState extends State<Home> {
 
+
   @override
   Widget build(BuildContext context) {
+    print(widget.userModel.userId);
+   merchant_id=widget.userModel.userId;
+    //print(merchant_id);
+//selection with merchant ID
+    Get.find<CategoryController>().getList('$DATA/0/$merchant_id');
 
-    Get.find<CategoryController>().getList('$DATA/0');
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
-             HeaderSection(fullName:'${widget.snapshot.data!.displayName}',imageUrl: widget.snapshot.data!.photoURL.toString(),),
+             HeaderSection(fullName:'${widget.user!.displayName}',imageUrl: widget.user!.photoURL.toString(),),
             Flexible(
               child: GetBuilder<CategoryController>(
                 builder: (controller) {

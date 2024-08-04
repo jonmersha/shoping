@@ -6,7 +6,6 @@ import 'package:shop/RemoteService/controller/store_controller.dart';
 import 'package:shop/components/text_form_field.dart';
 import 'package:shop/components/text_widget.dart';
 import 'package:shop/utils/app_constants.dart';
-import 'dart:math';
 
 class NewStockForm extends StatefulWidget {
   final product;
@@ -95,7 +94,7 @@ class _NewStockFormState extends State<NewStockForm> {
                 infoText(label:'Unit Price',text:widget.product.unitPrice),
                 infoText(label:'Profit Margin %',text:widget.product.profitMargin),
                 infoText(label:'Selling Price',text:'$sellingPrice'),
-                infoText(label:'Selling Price+VAT 15%',text:'$val'),
+                infoText(label:'Selling Price+VAT 15%',text:val),
               ],
             ),
           ),

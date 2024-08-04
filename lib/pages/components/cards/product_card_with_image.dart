@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 
 
 class ProductCardImage extends StatelessWidget {
+  const ProductCardImage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: Text('Product Card')),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
+        appBar: AppBar(title: const Text('Product Card')),
+        body: const Padding(
+          padding: EdgeInsets.all(16.0),
           child: ProductCard(
             imageUrl: 'https://via.placeholder.com/150',
             productName: 'Product Name',
@@ -27,7 +29,7 @@ class ProductCard extends StatelessWidget {
   final String productDescription;
   final String productPopularity;
 
-  ProductCard({
+  const ProductCard({super.key, 
     required this.imageUrl,
     required this.productName,
     required this.productDescription,
@@ -44,7 +46,7 @@ class ProductCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          ClipRRect(
+          const ClipRRect(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(15.0),
               topRight: Radius.circular(15.0),
@@ -60,7 +62,7 @@ class ProductCard extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               productName,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
@@ -84,19 +86,19 @@ class ProductCard extends StatelessWidget {
                 onPressed: () {
                   // Add your onPressed code here!
                 },
-                child: Text('Sell'),
+                child: const Text('Sell'),
               ),
               ElevatedButton(
                 onPressed: () {
                   // Add your onPressed code here!
                 },
-                child: Text('Add New'),
+                child: const Text('Add New'),
               ),
               ElevatedButton(
                 onPressed: () {
                   // Add your onPressed code here!
                 },
-                child: Text('Show'),
+                child: const Text('Show'),
               ),
             ],
           ),

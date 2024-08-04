@@ -1,14 +1,17 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 import 'package:shop/RemoteService/controller/user_controller.dart';
-import 'package:shop/RemoteService/data_provider.dart';
+import 'package:shop/auth/shop_profile.dart';
+import 'package:shop/pages/home.dart';
 import 'package:shop/utils/app_constants.dart';
 
 class CheckUser extends StatefulWidget {
-  final String uid;
+  //final String uid;
+  //final AsyncSnapshot<User?> userData;
+  final User? user;
 
-  const CheckUser({super.key, required this.uid});
+  const CheckUser({super.key, required this.user, });
 
   @override
   State<CheckUser> createState() => _CheckUserState();
@@ -17,29 +20,19 @@ class CheckUser extends StatefulWidget {
 class _CheckUserState extends State<CheckUser> {
   @override
   Widget build(BuildContext context) {
-    // Get.find<UserController>().getList(
-    //   '$ADD/${widget.uid.toString()}',
-   // );
-    context.read<DataProvider>().fetchData('$BASE_URL$USER/${widget.uid.toString()}');
-    print('$USER/${widget.uid.toString()}');
-    return Scaffold(
-      body: Consumer<DataProvider>(
-        builder: ( context,  controller, child) {
-          if(controller.isLoading) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          else{
-            return const Center(child: Text('IS loaded'),);
-          }
-        }),
-    );
+    //searching for the users on the system
+    Get.find<UserController>().getList('$USER/${widget.user!.uid.toString()}');
+    //Navigator.of(context).pop();
 
-    // FutureBuilder(
-    //   future: Get.find<UserController>().getList(
-    //     '$DATA/${widget.uid.toString()}',
-    //   ),
-    //   builder: (context, snapshot) {
-    //     return Container(child: Text('is'),);
-    //   });
+    return GetBuilder<UserController>(builder: (controller) {
+      return controller.isLoaded
+          ? ((controller.list.isEmpty)
+              ? Profile(user: widget.user)
+              : Home(
+                  userModel: controller.list[0],
+                  user: widget.user,
+                ))
+          : const Scaffold(body:  Center(child: CircularProgressIndicator()));
+    });
   }
 }

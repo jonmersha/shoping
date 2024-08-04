@@ -37,8 +37,9 @@ final String imageUrl;
               )
           ),
         GestureDetector(
-          onTap: () {
-            FirebaseAuth.instance.signOut();
+          onTap: () async {
+          await  FirebaseAuth.instance.signOut();
+
           },
           child: Icon(
             Icons.logout,

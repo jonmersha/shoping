@@ -11,6 +11,36 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
 
 
+  void _showLoadingDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false, // Prevent dismissing the dialog by tapping outside
+      builder: (BuildContext context) {
+        return Dialog(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.0),
+          ),
+          child: const Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                CircularProgressIndicator(),
+                SizedBox(height: 20),
+                Text(
+                  'Login...',
+                  style: TextStyle(fontSize: 18.0),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,13 +59,12 @@ class _LoginPageState extends State<LoginPage> {
                   size: 100,
                   color: Colors.amber,
                 ),
-
-
-
-
 InkWell(
   onTap: (){
-    AuthService().googleSignIn();
+    //_showLoadingDialog( context);
+    AuthService().googleSignIn(context);
+    //Navigator.of(context).pop();
+
   },
   child: Container(
     width: 200,
@@ -45,7 +74,7 @@ InkWell(
       borderRadius: BorderRadius.circular(20),
       color: Colors.green.shade200
     ),
-    child: Text('Login with google'),),
+    child: const Text('Login with google'),),
 )
               ],
             ),

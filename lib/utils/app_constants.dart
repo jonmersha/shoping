@@ -1,9 +1,10 @@
-const String local = "http://10.11.243.236:3000";
+const String local = "http://192.168.90.239:3000";
 const String localhost = "http://localhost:300";
 const String remote = "https://service.besheger.com";
 
 const String BASE_URL = remote;
-const int merchant_id=1;
+ int merchant_id=0;
+
 
 const DATA = '/shopping/data';
 const ADD = '/shopping/add';

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shop/pages/components/cards/product_card_with_image.dart';
-import 'package:shop/pages/forms/new_stock.dart';
 import 'package:shop/pages/forms/sold_product.dart';
-import 'package:shop/pages/products/stock_entry_list.dart';
 
 class ProductCard extends StatefulWidget {
   final product;
@@ -28,7 +25,7 @@ class _ProductCardState extends State<ProductCard> {
       children: <Widget>[
 
         ClipRRect(
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(15.0),
             topRight: Radius.circular(15.0),
           ),
@@ -43,7 +40,7 @@ class _ProductCardState extends State<ProductCard> {
           padding: const EdgeInsets.all(8.0),
           child: Text(
             widget.product.productName.toString(),
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
@@ -67,20 +64,20 @@ class _ProductCardState extends State<ProductCard> {
                 onPressed: () {
 
                 },
-                child: Text('update'),
+                child: const Text('update'),
               ),
               ElevatedButton(
                 onPressed: () {
                   // Add your onPressed code here!
                 },
-                child: Text('New'),
+                child: const Text('New'),
               ),
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => SoldProduct(product: widget.product,)));
                 },
-                child: Text('Sell'),
+                child: const Text('Sell'),
               ),
             ]
 

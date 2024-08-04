@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop/RemoteService/controller/category_controller.dart';
+import 'package:shop/utils/app_constants.dart';
 class RegistrationPage extends StatefulWidget {
   final data;
   final path;
@@ -16,6 +17,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
   Widget build(BuildContext context) {
     print(widget.path);
     Get.find<CategoryController>().addData(widget.path, widget.data);
+    Get.find<CategoryController>().getList('$DATA/0/$merchant_id');
+
     return Scaffold(
       body: GetBuilder<CategoryController>(
         builder: (controller) {

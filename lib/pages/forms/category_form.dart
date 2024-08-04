@@ -41,12 +41,14 @@ class _CreateCategoryState extends State<CreateCategory> {
     final Map<String, dynamic> data = {
      // "id":1, //int.parse(_idController.text),
       "name": _nameController.text,
-      "merchant_id": 1,//_merchantController.text,
+      "merchant_id": merchant_id,//_merchantController.text,
       "description": _descriptionController.text,
       "status":1,// _statusController.text,
       "image_name":'placeholder.jpg'// _imageNameController.text,
 
     };
+
+    //print(data);
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => RegistrationPage(path: '$ADD/0',data:data, message: 'Category Created!!'),
@@ -68,7 +70,6 @@ class _CreateCategoryState extends State<CreateCategory> {
              // buildTextFormField(_ownerIdController, 'ID', 'Enter Owner ID'),
               buildTextFormField(_nameController, 'Title', 'Enter Title'),
               buildTextFormField(_descriptionController, 'Descriptions', 'Enter Descriptions', maxLines: 3),
-             // buildTextFormField(_imageNameController, 'Image', 'upload immages'),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {

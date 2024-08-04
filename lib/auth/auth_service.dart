@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService{
   signInWithGoogle() async{
 
-    print('Now Google Sign in is done');
+   // print('Now Google Sign in is done');
     //begin interactive Sign in process
     final GoogleSignInAccount? googleUser=await GoogleSignIn().signIn();
 
@@ -22,16 +23,18 @@ class AuthService{
 
 
   }
-  Future<User?> googleSignIn() async {
+  Future<User?> googleSignIn(BuildContext context) async {
     final GoogleSignIn googleSignIn = GoogleSignIn();
     final FirebaseAuth auth = FirebaseAuth.instance;
     try {
       //Begin Interactive Sign in
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+      //showLoadingDialog.;
       if (googleUser == null) return null;
       //Obtain outh details from requast
       final GoogleSignInAuthentication googleAuth = await googleUser
           .authentication;
+
       //Create New Credentials for users
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
@@ -40,13 +43,18 @@ class AuthService{
       //Lets the users si
       final UserCredential authResult = await auth.signInWithCredential(
           credential);
+
+
       final User? user = authResult.user;
+     // Navigator.of(context).pop();
       return user;
     } catch (error) {
      // print("Error signing in with Google: $error");
+     // Navigator.of(context).pop();
+
       return null;
     }
+    //Navigator.of(context).pop();
   }
-
 
 }
