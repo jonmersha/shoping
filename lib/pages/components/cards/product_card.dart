@@ -57,7 +57,7 @@ class _ProductCardState extends State<ProductCard> {
             style: TextStyle(color: Colors.grey[700]),
           ),
         ),
-        ButtonBar(
+        OverflowBar(
             alignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               ElevatedButton(

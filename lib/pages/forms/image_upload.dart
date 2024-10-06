@@ -56,22 +56,22 @@ print('$BASE_URL${widget.path}');
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Image Upload'),
+        title: const Text('Image Upload'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             _image == null
-                ? Text('No image selected.')
+                ? const Text('No image selected.')
                 : Image.file(_image!),
             ElevatedButton(
               onPressed: _pickImage,
-              child: Text('Pick Image'),
+              child: const Text('Pick Image'),
             ),
             ElevatedButton(
               onPressed: _uploadImage,
-              child: Text('Upload Image'),
+              child: const Text('Upload Image'),
             ),
           ],
         ),

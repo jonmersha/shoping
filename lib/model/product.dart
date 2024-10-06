@@ -33,7 +33,6 @@ class Data {
   int? profitMargin;
   int? discountedPercentage;
   String? imagePath;
-
   Data(
       {this.id,
         this.category,

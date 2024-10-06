@@ -38,7 +38,7 @@ class _CategoryCardState extends State<CategoryCard> {
             Container(
               alignment: Alignment.topRight,
               height: 190,
-              padding: EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               decoration: BoxDecoration(
                   image: DecorationImage(
                 image: NetworkImage('$imagePath/${widget.category.imageName}'),
@@ -50,7 +50,7 @@ class _CategoryCardState extends State<CategoryCard> {
                 children: [
                   Container(
                     color: Colors.white,
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
 
                     child: InkWell(
                       onTap: (){
@@ -66,7 +66,7 @@ class _CategoryCardState extends State<CategoryCard> {
 
                       },
 
-                        child: Icon(Icons.edit)))],),
+                        child: const Icon(Icons.edit)))],),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
